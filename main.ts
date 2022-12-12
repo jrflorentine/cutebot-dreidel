@@ -44,11 +44,11 @@ function dreidel () {
 }
 function spin () {
     speed = 60
-    basic.clearScreen()
-    music.playSoundEffect(music.builtinSoundEffect(soundExpression.spring), SoundExpressionPlayMode.InBackground)
-    cuteBot.colorLight(cuteBot.RGBLights.ALL, 0x0000ff)
+    music.setTempo(240)
+    music.beginMelody(["E5", "G5", "E5", "G5", "E5", "G5", "E5", "-", "E5", "G5", "G5", "F5", "E5", "D5", "D5"], MelodyOptions.OnceInBackground)
+cuteBot.colorLight(cuteBot.RGBLights.ALL, 0x0000ff)
     cuteBot.motors(speed, 0 - speed)
-    basic.pause(randint(1000, 4000))
+    basic.pause(1800)
     for (let index = 0; index < 20; index++) {
         speed = speed - 3
         cuteBot.motors(speed, 0 - speed)
@@ -57,12 +57,17 @@ function spin () {
     cuteBot.stopcar()
 }
 input.onSound(DetectedSound.Loud, function () {
+    basic.clearScreen()
     spin()
     dreidel()
 })
 let speed = 0
 let letter = 0
-input.setSoundThreshold(SoundThreshold.Loud, 200)
-basic.showIcon(IconNames.Heart)
-basic.pause(1000)
-basic.clearScreen()
+input.setSoundThreshold(SoundThreshold.Loud, 220)
+basic.showLeds(`
+    . . # . .
+    # # # # #
+    # # # # #
+    . # # # .
+    . . # . .
+    `)
